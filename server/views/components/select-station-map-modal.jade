@@ -1,0 +1,36 @@
+script#select-station-map-modal(type="text/html")
+  .modal.fade(data-bind="attr: {id: id}")
+    .modal-dialog.bs-example-modal-lg
+      .modal-content
+        .modal-header
+          h4 Select Station
+        .modal-body
+          .map(data-bind="leafletMapMarker: {stations: stations, center: locationTracker.current, point: point}")
+          span(data-bind="text: point")
+            
+        .modal-footer
+          button.btn.btn-default(data-dismiss="modal") Close
+
+script.
+  ko.components.register("select-station-map-modal", {
+    template: {
+      element: "select-station-map-modal"
+    },
+    viewModel: function(params) {
+      this.point = params.point
+      this.center = params.center || window.locationTracker.current();
+      this.selected = params.selected;
+      this.stations = params.stations;
+      this.id = params.id;
+    }
+  });
+  setTimeout(function() {
+    $('.modal').on('show.bs.modal', function(event) {
+      var $modal = $(event.currentTarget);
+      var map = $modal.find('.map')[0].leafletMap
+      setTimeout(function() {
+        map.invalidateSize()
+      }, 1000)
+    })
+      
+  }, 2000)

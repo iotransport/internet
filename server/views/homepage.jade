@@ -1,0 +1,57 @@
+extends ./layout
+
+block styles
+
+block body
+  br
+  .container
+    .jumbotron.text-center
+      h1 #IoTransport
+      h2.lead 
+        span.text-muted by 
+        |  Open Wifi Party Train
+    br
+    p.lead One of our local challenges in Western Australia was to come up with a way of providing realtime train passenger sizes.
+
+    p.lead We've created an IoT device that estimates crowd density based on Wi-Fi. From analysis we've been able to determine crowd density with the following levels of confidence.
+    
+    table.table.table-striped.table-bordered
+      thead
+        tr
+          th
+          th Wi-Fi
+          th Wi-Fi RSSI
+          th Wi-Fi time
+          th Wi-Fi hybrid
+      tbody
+        tr
+          th max
+          td 0.86
+          td 0.91
+          td 0.91
+          td 0.91
+        tr
+          th average
+          td 0.61
+          td 0.74
+          td 0.63
+          td 0.75
+
+    p.lead We've built two key interfaces for consuming this information.
+
+    .row
+      .col-sm-6
+        h3 Commuter
+        p.lead A passenger focused tool that gives upcoming train passenger size data.
+        p.lead It uses a public GTFS feed, a non public realtime train location feed and is presented alongside unlinked but real density data.  
+        a.btn.btn-primary.btn-lg(href="/commuter") View Demo
+      .col-sm-6
+        h3 Devices
+        p.lead A geospatial view of deployed IoT devices to visualise community places.
+        
+        p.lead Real device data has been duplicated to demonstrate deployments of device fleets across community spaces. 
+        
+        a.btn.btn-primary.btn-lg(href="/devices") View Demo
+    hr
+
+block afterScripts

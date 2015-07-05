@@ -1,0 +1,15 @@
+script#time-search-input(type="text/html")
+  .form-group
+    label.control-label(data-bind="text: title")
+    input.form-control(type="time", data-bind="value: time")
+
+script.
+  ko.components.register("time-search-input", {
+    template: {
+      element: "time-search-input"
+    },
+    viewModel: function(params) {
+      this.time = ko.observable(moment(params.time).format('HH:mm:ss'));
+      this.title = params.title || 'Start Time';
+    }
+  });

@@ -1,0 +1,18 @@
+script#fleet-overview-map(type="text/html")
+  .fleets-map(data-bind="leafletMapFleet: {fleets: fleets, test: 'test', center: center}")
+
+script.
+  ko.components.register("fleet-overview-map", {
+    template: {
+      element: "fleet-overview-map"
+    },
+    viewModel: function(params) {
+      this.fleets = ko.observableArray([]);
+      this.center = params.center || window.locationTracker.current;
+      var fleets = ko.observableArray([]);
+      this.fleets = fleets;
+      io.socket.get('/fleet', function(data, jwres) {
+        fleets(data);
+      })
+    }
+  });

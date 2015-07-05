@@ -1,0 +1,38 @@
+extends ../layout
+
+block styles
+
+block body
+  .container
+    h1 Devices
+    .well
+      h4 Density, humidity and temperature data is all real.
+      
+      p We are currently capturing all this data and sending it from our IoT devices and to a cloud monitoring service.
+      
+      p Additional data feeds are simple to create and could provide additional metrics such as light levels, air quality and noise levels.
+      
+      p The density, humidity and temperature data has been captured from a real IoT device which we ran in the Hackerspace over Saturday evening and Sunday.
+      
+      p We've duplicated it to demostrate fleets of IoT devices that could be deployed across community places. 
+      
+      
+    fleet-overview-map(params="{fleets: ['hackerspaces']}")
+    br
+    br
+    br
+    br
+    br
+    br
+    br
+    br
+    br
+    br
+    br
+    
+    
+block afterScripts
+  include ../components/fleet-overview-map
+  script.
+    var vm = {};
+    ko.applyBindings(vm)

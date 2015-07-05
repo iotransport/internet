@@ -1,0 +1,68 @@
+extends ../layout
+
+block styles
+
+block body
+  .container
+    h1 Commuter
+    .well
+      h4 Density data and transit data is real, but not linked.
+      p Whilst we think an interface like this would be super awesome, the IoT devices we have created do not currently exist in trains.  
+      
+      p The density data has been captured from a real IoT device which we ran in the Hackerspace over Saturday evening and Sunday monitoring corwd density. 
+      
+      p The transit data is coming from a non public train feed exposed via the Transperth phone app and linked to public Transperth GTFS (General Transit Feed Specification) feed to allow geospatial route planning.
+    .row
+      .col-md-4
+        h3 Search
+        station-search-input(params="{title: 'Start Station', map: true, point:  start}")
+        //
+          station-search-input(params="{title: 'End Station', source, point:  end}")
+          time-search-input(params="{default: new Date()}")
+      .col-md-8
+        h3 Results
+        .panel
+          .panel-body
+            .row
+              .col-xs-4
+                h4 Line
+              .col-xs-4
+                h4 Fill
+              .col-xs-4
+                h4 Predicted
+        upcoming-trains-list(params="{trains: trains}")
+
+block afterScripts
+  include ../components/time-search-input
+  include ../components/upcoming-trains-list
+  include ../components/select-station-map-modal
+  include ../components/station-search-input
+  script.
+    var vm = {
+      trains: ko.observableArray([]),
+      stations: ko.observableArray(),
+      start: ko.observable(),
+      end: ko.observable()
+    }
+    vm.realtrains = ko.computed(function() {
+        var station = vm.start();
+        if (station) {
+          var stationId;
+          vm.stations().some(function(item) { stationId = item.title == vm.start() ? item.identifier : false; return stationId })
+          $.ajax({
+            type: 'GET',
+            url: 'http://api.perthtransit.com/1/train_stations/' + stationId,
+            dataType: 'jsonp',
+            success: function(data) {
+              vm.trains(data.response.times)
+            },
+            error: function(data) {
+              console.log(data)
+            }
+          })
+        }
+    })
+    io.socket.get('/station', function(data, jwres) {
+      vm.stations(data);
+    })
+    ko.applyBindings(vm)

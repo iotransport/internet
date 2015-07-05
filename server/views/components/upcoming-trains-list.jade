@@ -1,0 +1,23 @@
+script#upcoming-trains-list(type="text/html")
+  // ko foreach: trains
+  .panel.panel-default
+    .panel-body
+      br
+      .row
+        .col-xs-4
+          p.lead(data-bind="text: line")
+        .col-xs-4
+          p.lead(data-bind="text: '40'")
+        .col-xs-4
+          p.lead(data-bind="text: time")
+  // /ko
+
+script.
+  ko.components.register("upcoming-trains-list", {
+    template: {
+      element: "upcoming-trains-list"
+    },
+    viewModel: function(params) {
+      this.trains = params.trains;
+    }
+  });

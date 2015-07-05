@@ -1,0 +1,40 @@
+script#station-search-input(type="text/html")
+  .form-group
+    label.control-label(data-bind="text: title")
+    .input-group
+      input.form-control(data-bind="jqAuto: {value: station, source: suggestions, labelProp: 'title', valueProp: 'title'}")
+      .input-group-btn
+        button.btn.btn-default(type="button", data-toggle="modal", data-target="#start-map")
+          i.fa.fa-map-marker
+  select-station-map-modal(params="{stations: vm.stations, id: 'start-map', point: station}")
+
+script.
+  ko.components.register("station-search-input", {
+    template: {
+      element: "station-search-input"
+    },
+    viewModel: function(params) {
+      this.station = params.point;
+      this.title = params.title;
+      this.map = params.map || false;
+      this.selected = params.selected;
+      this.suggestions = function(searchTerm, callback) {
+        var query = {};
+        if (true) {
+          query.where = {
+            title: {
+              contains: searchTerm
+            }
+          }
+        }
+        io.socket.get('/station', query,
+          function(data, jwRes) {
+            var hack = data.map(function(item) {
+              
+            })
+            return callback(data)
+          }
+        )
+      }
+    }
+  });

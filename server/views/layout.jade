@@ -1,0 +1,38 @@
+doctype html
+html
+  head
+    title= title
+
+    // Viewport mobile tag for sensible mobile support
+    meta(name="viewport",content="width=device-width, initial-scale=1, maximum-scale=1")
+    
+    // STYLES
+    link(rel="stylesheet", href="/styles/importer.css")
+    link(rel="stylesheet", href="/vendor/bootstrap-3.3.5-dist/css/bootstrap.min.css")
+    link(rel="stylesheet", href="/vendor/font-awesome-4.3.0-dist/css/font-awesome.min.css")
+    link(rel="stylesheet", href="/vendor/jquery-ui-1.11.4-custom-dist/jquery-ui.min.css")
+    link(rel="stylesheet", href="/vendor/jquery-ui-1.11.4-custom-dist/jquery-ui.structure.min.css")
+    link(rel="stylesheet", href="/vendor/jquery-ui-1.11.4-custom-dist/jquery-ui.theme.min.css")
+    // STYLES END
+    link(rel="stylesheet", href="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css")
+    block styles
+
+  body
+    block body
+    
+    script(src="/vendor/jquery-2.1.4-dist/js/jquery-2.1.4.min.js")
+    script(src="/vendor/knockout-3.3.0-dist/js/knockout-3.3.0.min.js")
+    script(src="/js/dependencies/sails.io.js")
+    script(src="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js")
+    script(src="/vendor/async-1.3.0-dist/js/async.min.js")
+    script(src="/js/ko-binding-handlers/leafletMapSelect.js")
+    script(src="/js/ko-binding-handlers/leafletMapFleet.js")
+    script(src="/js/user-location.js")
+    script(src="/vendor/bootstrap-3.3.5-dist/js/bootstrap.min.js")
+    script(src="/vendor/jquery-ui-1.11.4-custom-dist/jquery-ui.min.js")
+    script(src="/vendor/knockout-jqAutocomplete-0.4.3-dist/js/knockout-jqAutocomplete.min.js")
+    script(src="/vendor/moment.js-2.10.3-dist/js/moment.min.js")
+    // NOT SCRIPTS
+    // NOT SCRIPTS END
+
+    block afterScripts
