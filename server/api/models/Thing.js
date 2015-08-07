@@ -21,7 +21,7 @@ module.exports = {
       model: 'fleet'
     },
     snapshots: {
-      collection: 'thing',
+      collection: 'snapshot',
       via: 'thing'
     }
   }
